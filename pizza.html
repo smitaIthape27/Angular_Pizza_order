@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <script data-require="angular.js@1.4.0-beta.6" data-semver="1.4.0-beta.6" src="https://code.angularjs.org/1.4.0-beta.6/angular.js">
+  </script> 
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="pizzacontroller.js" type="text/javascript"></script>
+    <link href="bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+
+<body ng-app="pizzaApp">
+<div class="banner">
+		<div class="banner-info">
+			<div class="container">
+				<div class="logo">
+					<div class="ribbon">
+						<div class="ribbon-fold"><h1> <a href="index.html">Pizza</a></h1></div>
+					</div>
+					<h2>Better Ingredients better Pizza</h2>
+				</div>			
+				
+			</div>
+		</div>
+	</div>
+    <div class="banner-bottom">
+		<div class="container">
+			<div class="banner-text">
+				<h3>Tasty Italian Pizza</h3>
+				<p>Special Offer to day</p>
+				<a href="#" class="btn btn-1 btn-1b">More</a>
+			</div>
+			<!--welcome-->
+			<div class="welcome">
+				<h3 class="title">Welcome</h3>
+				
+                <div ng-controller="PizzaCtrl" align="center">  
+           
+                
+                <div ng-repeat="pizza in pizzas">
+                        <div class="welcome-info">
+					<div class="col-md-3 welcome-grids">
+                    
+                      <div class="welcome-img"> <span><img src= {{pizza.photo}} /></span></div>  
+                        <div><h3><span>{{pizza.name}}</span>  </h3></div>               
+                    <div> <span ng-repeat="i in pizza.ingredients">{{i}},</span> </div>
+                    <div> <span>{{pizza.Crust}}</span> </div>
+                      <div> <span>{{pizza.Size}}</span>  </div>
+                   <div>   <span>{{ pizza.Price }}</span> </div>
+                     <div class="btnorder" onclick="ordernow2({{ pizza.id }})">   <span> {{ pizza.button }}</span> </div>
+                      </div>
+                      </div>    
+            </div>
+            <p id="demo"></p>
+           
+<div id="result1"></div>
+  <p><button onclick="ordernow1()" type="button">Confirm Order!</button></p>
+        <div id="result2"></div>
+    </div>
+        </div> 
+        </div>
+        <script>
+            var text = '{"employees":[' +
+'{"id": 1, "name":"Veggie Supreme","Price":"Rs.329","button":"ORDER NOW"  },' +
+'{"name":"Paneer Soya","Price":"Rs.545" },' +
+'{"name":"Veggie Italiano","Price":"Rs.625" }]}';
+
+            obj = JSON.parse(text);
+         
+</script>
+
+      <script>
+          function ordernow1() {
+              if (typeof (Storage) !== "undefined") {
+                  if (sessionStorage.clickcount) {
+                      sessionStorage.clickcount = Number(sessionStorage.clickcount) + 1;
+                  } else {
+                      sessionStorage.clickcount = 10;
+                  }
+                  document.getElementById("result1").innerHTML = "You order will be placed in 30 Minutes(s)."; ;
+              } else {
+                  document.getElementById("result1").innerHTML = "Sorry, your browser does not support web storage...";
+              }
+          }
+</script>
+       <script>
+           function ordernow2() {
+               if (typeof (Storage) !== "undefined") {
+                   if (sessionStorage.clickcount) {
+                       sessionStorage.clickcount = Number(sessionStorage.clickcount) + 1;
+                   } else {
+                       sessionStorage.clickcount = 1;
+                   }
+                   document.getElementById("result2").innerHTML = obj.employees[0].name + " " + obj.employees[0].Price; ;
+               } else {
+                   document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+               }
+           }
+</script>        
+    </body>
+</html>
